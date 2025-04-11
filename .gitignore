@@ -1,0 +1,19 @@
+﻿# Docker
+infrastructure/.env
+infrastructure/postgres_data/
+
+# Datos
+data/raw/
+data/processed/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+
+# VS Code
+.vscode/

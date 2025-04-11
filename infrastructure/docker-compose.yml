@@ -1,0 +1,33 @@
+services:
+  web:
+    image: python:3.9
+    ports:
+      - "8050:8050"
+    volumes:
+      - type: bind
+        source: C:\Users\Belisario\fintech_project
+        target: /app
+    working_dir: /app
+    tty: true
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: fintech
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d fintech"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
